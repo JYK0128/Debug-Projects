@@ -9,6 +9,7 @@ class App extends React.Component {
         this.getHandler = this.getHandler.bind(this);
         this.postHandler_BodyToken = this.postHandler_BodyToken.bind(this);
         this.postHandler_headerToken = this.postHandler_headerToken.bind(this);
+        this.getHandler_ParameterToken = this.getHandler_ParameterToken.bind(this);
     }
 
     getHandler(e: any) {
@@ -47,6 +48,24 @@ class App extends React.Component {
             .catch(error => console.error(error));
     }
 
+    //parameter token
+    getHandler_ParameterToken(e: any) {
+        e.preventDefault();
+
+        const url = 'http://localhost:8000/auth/login?'
+            + 'email=nilson@email.com' + '&password=nilson'
+
+        const request: RequestInit = {
+            method: 'GET',
+            headers: {'Content-Type': 'Application/JSON'},
+        }
+
+        fetch(url, request)
+            .then(response => response.headers)
+            .then(headers => headers.forEach(header => console.log(header)))
+            .catch(error => console.error(error));
+    }
+
     //header token
     postHandler_headerToken(e: any) {
         e.preventDefault();
@@ -59,18 +78,21 @@ class App extends React.Component {
         const request: RequestInit = {
             method: 'POST',
             headers: {
-                /* cors setting? */
-                'Content-Type': 'Application/JSON',
-                'Access-Control-Allow-Credentials': 'true',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Expose-Headers': '*'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'true',
+                'Access-Control-Expose-Headers': 'Authorization',
+                'Access-Control-Allow-Methods': '*', // without 'Cookie' & 'Credentials'
+                'Access-Control-Allow-Credentials': 'true' // allow 'Credentials'
             },
             body: JSON.stringify(content)
         }
 
         fetch(url, request)
-            .then(response => response.headers.get('Authorization'))
-            .then(key => this.myRef.current!.innerText = String(key))
+            .then(response => response.headers)
+            .then(headers => {
+                Array.from(headers.keys()).forEach(header => console.log(header));
+                console.log(headers.get('Authorization'));
+            })
             .catch(error => console.error(error));
     }
 

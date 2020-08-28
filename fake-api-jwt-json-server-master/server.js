@@ -2,6 +2,7 @@ const fs = require('fs')
 const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 const server = jsonServer.create()
 const router = jsonServer.router('./database.json')
@@ -9,7 +10,8 @@ const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(bodyParser.json())
-server.use(jsonServer.defaults());
+server.use(jsonServer.defaults())
+server.use(cors({ origin: true, credentials: true, exposedHeaders: ['Authorization'] }))
 
 const SECRET_KEY = '123456789'
 
@@ -86,6 +88,26 @@ server.post('/auth/login', (req, res) => {
     res.status(status).json({status, message})
     return
   }
+  const access_token = createToken({email, password})
+  console.log("Access Token:" + access_token);
+  res.status(200).set("Authorization", access_token).json({access_token})
+})
+
+// Login to one of the users from ./users.json
+server.get('/auth/login', (req, res) => {
+  console.log("login endpoint called; request body:");
+  console.log(req.query);
+  
+  const email = req.query.email;
+  const password = req.query.password;
+
+  if (isAuthenticated({email, password}) === false) {
+    const status = 401
+    const message = 'Incorrect email or password'
+    res.status(status).json({status, message})
+    return
+  }
+    
   const access_token = createToken({email, password})
   console.log("Access Token:" + access_token);
   res.status(200).set("Authorization", access_token).json({access_token})

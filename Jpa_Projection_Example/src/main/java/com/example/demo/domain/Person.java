@@ -4,16 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
 public class Person implements Serializable {
-    @Id
-    private Long id;
+    private @Id Long id;
+
+    @Column(name="FIRSTNAME")
     private String firstName;
+    @Column(name="LASTNAME")
     private String lastName;
 }

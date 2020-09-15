@@ -1,0 +1,25 @@
+[[Api]]
+= People
+:toc: left
+:toclevels: 5
+
+[[Subjective]]
+== Subjective
+.Access API
+include::{snippets}/people/links.adoc[]
+include::{snippets}/people/id/path-parameters.adoc[]
+
+[[Methods]]
+=== API
+.List of Search Methods
+include::{snippets}/people/search/links.adoc[]
+
+[[findById]]
+==== findById
+.List of Parameters
+include::{snippets}/people/search/findCustomById/request-parameters.adoc[]
+
+[[findCustomById]]
+==== findCustomById
+.List of Parameters
+include::{snippets}/people/search/findCustomById/request-parameters.adoc[]

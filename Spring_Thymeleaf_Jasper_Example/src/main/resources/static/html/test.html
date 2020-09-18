@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<h1>Thymeleaf 예제</h1>
+	<table>
+		<tr>
+			<th>number</th>
+			<th>uid</th>
+			<th>name</th>
+		</tr>
+
+		<tr th:each="user:${test}">
+			<td th:text="${userStat.index}"></td>
+			<td th:text="${user.uid}"></td>
+			<td th:text="${user.name}"></td>
+		</tr>
+	</table>
+</body>
+</html>

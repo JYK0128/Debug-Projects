@@ -1,0 +1,1 @@
+INSERT into Member(email, password, enabled) values ('test1@test.com', 'test', true);

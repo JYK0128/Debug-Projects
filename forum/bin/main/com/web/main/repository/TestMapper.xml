@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.main.repository.TestMapper">
+
+	<resultMap id="TestVORM" type="com.web.main.domain.TestVO">
+		<result property="name" column="name" />
+		<result property="uid" column="uid" />
+	</resultMap>
+
+	<select id="now" resultType="string">
+		select now()
+	</select>
+
+	<select id="getName" resultType="string">
+		Select name from test limit 1
+	</select>
+
+	<select id="getUid" resultType="int">
+		Select uid from test limit 1
+	</select>
+
+	<select id="getObj1" resultType="com.web.main.domain.TestVO">
+		Select * from test limit 1
+	</select>
+	
+	<select id="getObj2" resultMap="TestVORM">
+		Select * from test limit 1
+	</select>
+	
+	<select id="getList" resultMap="TestVORM">
+		Select * from test
+	</select>
+</mapper>

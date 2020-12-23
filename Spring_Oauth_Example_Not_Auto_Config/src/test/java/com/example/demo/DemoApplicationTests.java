@@ -39,15 +39,19 @@ class DemoApplicationTests {
 
     @Test
     void functional_interface_1(){
+        //<param, return>
         Function<String, String> function = str->str + " with function";
         System.out.println("function: " + function.apply("test"));
 
+        //<param> return boolean
         Predicate<String> predicate = str->str.isEmpty();
         System.out.println("predicate: " + predicate.test("test"));
 
-        Consumer<String> consumer = str-> System.out.println("consumer: " + str);
+        //<param> return void
+        Consumer<String> consumer = str -> System.out.println("consumer: " + str);
         consumer.accept("test");
 
+        //void param <return>
         Supplier<String> supplier = ()-> "test";
         System.out.println("supplier: " + supplier.get());
     }

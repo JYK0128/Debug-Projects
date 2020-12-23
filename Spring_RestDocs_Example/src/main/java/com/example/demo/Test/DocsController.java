@@ -21,7 +21,7 @@ public class DocsController {
     private ApplicationContext applicationContext;
 
     @GetMapping(path="/docs")
-    ModelAndView getStaticDocsIndex() throws IOException {
+    ModelAndView getDocsIndex() throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("docs");
 

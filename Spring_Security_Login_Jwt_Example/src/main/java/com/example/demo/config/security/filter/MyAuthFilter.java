@@ -2,6 +2,7 @@ package com.example.demo.config.security.filter;
 
 import com.example.demo.config.security.JwtProps;
 import com.example.demo.config.security.payload.UserPayload;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -68,6 +69,7 @@ public class MyAuthFilter extends BasicAuthenticationFilter {
 
     private Map<String, Object> getPayload(Jws<Claims> claimsJws){
         Map<String, Object> result = new HashMap<String, Object>();
+
 
         String username = claimsJws.getBody().getSubject();
         Object claim = claimsJws.getBody().get(JwtProps.CLAIM_KEY);

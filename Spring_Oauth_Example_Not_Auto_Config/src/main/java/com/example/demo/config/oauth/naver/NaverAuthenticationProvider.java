@@ -20,6 +20,7 @@ public class NaverAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         try {
+            System.out.println("authentication = " + authentication);
             UserDetails userDetails = userDetailsService.loadUserByAuthentication(authentication);
             final Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
 

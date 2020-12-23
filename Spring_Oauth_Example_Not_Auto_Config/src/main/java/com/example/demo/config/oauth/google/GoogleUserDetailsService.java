@@ -54,7 +54,7 @@ public class GoogleUserDetailsService implements UserDetailsService {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
 
         URI tokenInfoURI = new URI("https://www.googleapis.com/oauth2/v3/userinfo");
         ResponseEntity<Map> userResponse = restTemplate.exchange(tokenInfoURI,
